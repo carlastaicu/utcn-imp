@@ -159,6 +159,8 @@ private:
   void EmitMul();
   /// Emit an mul opcode.
   void EmitDiv();
+  /// Emit an equal opcode.
+  void EmitEqual();
   /// Emit a label.
   void EmitLabel(Label label);
   /// Emit a conditional jump.

@@ -50,6 +50,8 @@ private:
   std::shared_ptr<Expr> ParseAddSubExpr();
   /// Parse an mul/div expression.
   std::shared_ptr<Expr> ParseMulDivExpr();
+  /// Parse an boolean expression.
+  std::shared_ptr<Expr> ParseBooleanExpr();
 
   /// Helper to get the current token.
   inline const Token &Current() { return lexer_.GetToken(); }

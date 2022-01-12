@@ -213,6 +213,18 @@ std::shared_ptr<Expr> Parser::ParseMulDivExpr()
 }
 
 // -----------------------------------------------------------------------------
+std::shared_ptr<Expr> Parser::ParseBooleanExpr()
+{
+    std::shared_ptr<Expr> term = ParseAddSubExpr();
+    while (Current().Is(Token::Kind::DEQUAL)) {
+      lexer_.Next();
+      auto rhs = ParseAddSubExpr();
+      term = std::make_shared<BinaryExpr>(BinaryExpr::Kind::EQUAL, term, rhs);
+    }
+    return term;
+}
+
+// -----------------------------------------------------------------------------
 const Token &Parser::Expect(Token::Kind kind)
 {
   lexer_.Next();

@@ -77,6 +77,14 @@ void Interp::Run()
         Push(lhs / rhs);
         continue;
       }
+      case Opcode::EQUAL: {
+        auto rhs = PopInt();
+        auto lhs = PopInt();
+        Interp::Value val((rhs == lhs));
+        val.Kind = Value::Kind::INT;
+        Push(val);
+        continue;
+      }
       case Opcode::RET: {
         auto depth = prog_.Read<unsigned>(pc_);
         auto nargs = prog_.Read<unsigned>(pc_);

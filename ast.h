@@ -104,7 +104,8 @@ public:
     ADD,
     SUB,
     MUL,
-    DIV
+    DIV,
+    EQUAL
   };
 
 public:

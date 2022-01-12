@@ -50,6 +50,7 @@ public:
     MINUS,
     STAR,
     DIV,
+    DEQUAL,
     // Complex tokens.
     INT,
     STRING,
@@ -120,6 +121,7 @@ public:
   static Token Ident(const Location &l, const std::string &str);
   static Token String(const Location &l, const std::string &str);
   static Token Integer(const Location &l, uint64_t nr);
+  static Token DoubleEqual(const Location &l) {return Token(l, Kind::DEQUAL);}
 
   /// Print the token to a stream.
   void Print(std::ostream &os) const;

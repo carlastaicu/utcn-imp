@@ -14,6 +14,7 @@ std::ostream &operator<<(std::ostream &os, Opcode op)
     case Opcode::POP:        return os << "POP";
     case Opcode::CALL:       return os << "CALL";
     case Opcode::ADD:        return os << "ADD";
+    case Opcode::SUB:        return os << "SUB";
     case Opcode::RET:        return os << "RET";
     case Opcode::JUMP_FALSE: return os << "JUMP_FALSE";
     case Opcode::JUMP:       return os << "JUMP";

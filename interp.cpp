@@ -95,6 +95,12 @@ void Interp::Run()
         Push(v);
         continue;
       }
+      case Opcode::MOD: {
+        auto rhs = PopInt();
+        auto lhs = PopInt();
+        Push(lhs%rhs);
+        continue;
+      }
       case Opcode::JUMP_FALSE: {
         auto cond = Pop();
         auto addr = prog_.Read<size_t>(pc_);

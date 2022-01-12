@@ -224,10 +224,15 @@ std::shared_ptr<Expr> Parser::ParseMulDivExpr()
     auto rhs = ParseCallExpr();
     term = std::make_shared<BinaryExpr>(BinaryExpr::Kind::DIV, term, rhs);
   }
-   while (Current().Is(Token::Kind::STAR)) {
+  while (Current().Is(Token::Kind::STAR)) {
     lexer_.Next();
     auto rhs = ParseCallExpr();
     term = std::make_shared<BinaryExpr>(BinaryExpr::Kind::MUL, term, rhs);
+  }
+  while (Current().Is(Token::Kind::MOD)) {
+    lexer_.Next();
+    auto rhs = ParseCallExpr();
+    term = std::make_shared<BinaryExpr>(BinaryExpr::Kind::MOD, term, rhs);
   }
   return term;
 }

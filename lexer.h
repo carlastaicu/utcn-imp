@@ -52,6 +52,7 @@ public:
     MINUS,
     STAR,
     DIV,
+    MOD,
     DEQUAL,
     // Complex tokens.
     INT,
@@ -116,6 +117,7 @@ public:
   static Token Minus(const Location &l) { return Token(l, Kind::MINUS); }
   static Token Star(const Location &l) {return Token(l, Kind::STAR);}
   static Token Div(const Location &l) {return Token(l, Kind::DIV);}
+  static Token Mod(const Location &l) {return Token(l, Kind::MOD);}
   static Token Comma(const Location &l) { return Token(l, Kind::COMMA); }
   static Token Func(const Location &l) { return Token(l, Kind::FUNC); }
   static Token Return(const Location &l) { return Token(l, Kind::RETURN); }

@@ -106,6 +106,7 @@ public:
     SUB,
     MUL,
     DIV,
+    MOD,
     EQUAL
   };
 

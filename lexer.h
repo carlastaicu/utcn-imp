@@ -37,6 +37,8 @@ public:
     FUNC,
     RETURN,
     WHILE,
+    IF,
+    ELSE,
     // Symbols.
     LPAREN,
     RPAREN,
@@ -122,6 +124,8 @@ public:
   static Token String(const Location &l, const std::string &str);
   static Token Integer(const Location &l, uint64_t nr);
   static Token DoubleEqual(const Location &l) {return Token(l, Kind::DEQUAL);}
+  static Token If(const Location &l) { return Token(l, Kind::IF);}
+  static Token Else(const Location &l) { return Token(l, Kind::ELSE);}
 
   /// Print the token to a stream.
   void Print(std::ostream &os) const;

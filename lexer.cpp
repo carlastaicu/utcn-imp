@@ -146,6 +146,8 @@ std::ostream &operator<<(std::ostream &os, const Token::Kind kind)
     case Token::Kind::INT: return os << "INT";
     case Token::Kind::STRING: return os << "STRING";
     case Token::Kind::IDENT: return os << "IDENT";
+    case Token::Kind::IF: return os <<"if";
+    case Token::Kind::ELSE: return os <<"else";
   }
   return os;
 }
@@ -247,6 +249,8 @@ const Token &Lexer::Next()
         if (word == "func") return tk_ = Token::Func(loc);
         if (word == "return") return tk_ = Token::Return(loc);
         if (word == "while") return tk_ = Token::While(loc);
+        if (word == "if") return tk_ = Token::If(loc);
+        if (word == "else") return tk_ = Token::Else(loc);
         return tk_ = Token::Ident(loc, word);
       }
       Error("unknown character '" + std::string(1, chr_) + "'");

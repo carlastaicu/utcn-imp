@@ -22,7 +22,8 @@ public:
     BLOCK,
     WHILE,
     EXPR,
-    RETURN
+    RETURN,
+    IF
   };
 
 public:
@@ -237,6 +238,37 @@ private:
   std::shared_ptr<Expr> cond_;
   /// Expression to be executed in the loop body.
   std::shared_ptr<Stmt> stmt_;
+};
+
+class IfStmt final : public Stmt {
+public:
+    IfStmt(std::shared_ptr<Expr> cond, std::shared_ptr<Stmt> stmt)
+    : Stmt(Kind::IF)
+    , cond_(cond)
+    , stmt_(stmt){}
+    IfStmt(std::shared_ptr<Expr> cond, std::shared_ptr<Stmt> stmt, std::shared_ptr<Stmt> elsestmt)
+            : Stmt(Kind::IF)
+            , haveElse(true)
+            , cond_(cond)
+            , stmt_(stmt)
+            , elsestmt_(elsestmt){}
+
+    bool HaveElse() const {
+        return haveElse;
+    }
+
+    const Expr &GetCond() const { return *cond_; }
+    const Stmt &GetStmt() const { return *stmt_; }
+    const Stmt &GetElseStmt() const { return *elsestmt_; }
+
+private:
+    bool haveElse;
+    /// Condition for the if statement.
+    std::shared_ptr<Expr> cond_;
+    /// Expression to be executed
+    std::shared_ptr<Stmt> stmt_;
+    /// Expression to be executed for else
+    std::shared_ptr<Stmt> elsestmt_;
 };
 
 /**

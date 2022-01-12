@@ -48,6 +48,8 @@ public:
     COMMA,
     PLUS,
     MINUS,
+    STAR,
+    DIV,
     // Complex tokens.
     INT,
     STRING,
@@ -109,6 +111,8 @@ public:
   static Token Equal(const Location &l) { return Token(l, Kind::EQUAL); }
   static Token Plus(const Location &l) { return Token(l, Kind::PLUS); }
   static Token Minus(const Location &l) { return Token(l, Kind::MINUS); }
+  static Token Star(const Location &l) {return Token(l, Kind::STAR);}
+  static Token Div(const Location &l) {return Token(l, Kind::DIV);}
   static Token Comma(const Location &l) { return Token(l, Kind::COMMA); }
   static Token Func(const Location &l) { return Token(l, Kind::FUNC); }
   static Token Return(const Location &l) { return Token(l, Kind::RETURN); }

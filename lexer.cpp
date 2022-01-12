@@ -17,6 +17,10 @@ Token::Token(const Token &that)
       value_.StringValue = new std::string(*that.value_.StringValue);
       break;
     }
+    case Kind::INT: {
+      value_.IntValue = that.value_.IntValue;
+      break;
+    }
     default: {
       break;
     }
@@ -42,6 +46,10 @@ Token &Token::operator=(const Token &that)
     case Kind::STRING:
     case Kind::IDENT: {
       value_.StringValue = new std::string(*that.value_.StringValue);
+      break;
+    }
+    case Kind::INT: {
+      value_.IntValue = that.value_.IntValue;
       break;
     }
     default: {
@@ -81,6 +89,15 @@ Token Token::String(const Location &l, const std::string &str)
   tk.value_.StringValue = new std::string(str);
   return tk;
 }
+
+// -----------------------------------------------------------------------------
+Token Token::Integer(const Location &l, uint64_t nr)
+{
+  Token tk(l, Kind::INT);
+  tk.value_.IntValue = nr;
+  return tk;
+}
+
 
 // -----------------------------------------------------------------------------
 void Token::Print(std::ostream &os) const
@@ -197,7 +214,15 @@ const Token &Lexer::Next()
       return tk_ = Token::String(loc, word);
     }
     default: {
-      if (IsIdentStart(chr_)) {
+      if(isdigit(chr_)) {
+        uint64_t number = 0;
+        do {
+          number = number * 10 + (chr_ - '0');
+          NextChar();
+        } while (isdigit(chr_));
+        return tk_ = Token::Integer(loc, number);
+      }
+      else if (IsIdentStart(chr_)) {
         std::string word;
         do {
           word.push_back(chr_);

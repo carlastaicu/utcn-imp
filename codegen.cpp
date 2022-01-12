@@ -171,6 +171,9 @@ void Codegen::LowerExpr(const Scope &scope, const Expr &expr)
     case Expr::Kind::REF: {
       return LowerRefExpr(scope, static_cast<const RefExpr &>(expr));
     }
+    case Expr::Kind::INTEGER: {
+      return LowerIntegerExpr(scope, static_cast<const IntegerExpr &>(expr));
+    }
     case Expr::Kind::BINARY: {
       return LowerBinaryExpr(scope, static_cast<const BinaryExpr &>(expr));
     }
@@ -198,6 +201,13 @@ void Codegen::LowerRefExpr(const Scope &scope, const RefExpr &expr)
       return;
     }
   }
+}
+
+// -----------------------------------------------------------------------------
+void Codegen::LowerIntegerExpr(const Scope &scope, const IntegerExpr &expr)
+{
+  EmitPushInt(int64_t(expr.GetNumber()));
+  return;
 }
 
 // -----------------------------------------------------------------------------
@@ -313,6 +323,15 @@ void Codegen::EmitPushProto(RuntimeFn fn)
   Emit<Opcode>(Opcode::PUSH_PROTO);
   Emit<RuntimeFn>(fn);
 }
+
+// -----------------------------------------------------------------------------
+void Codegen::EmitPushInt(int64_t nr)
+{
+  depth_ += 1;
+  Emit<Opcode>(Opcode::PUSH_INT);
+  Emit<int64_t>(nr);
+}
+
 
 // -----------------------------------------------------------------------------
 void Codegen::EmitPeek(uint32_t index)

@@ -87,6 +87,13 @@ public:
     return *value_.StringValue;
   }
 
+  /// Return the integer value.
+  uint64_t GetInteger() 
+  {
+    assert(Is(Kind::INT) && "not an identifier");
+    return value_.IntValue;
+  }
+
   /// Copy operator.
   Token &operator=(const Token &that);
 
@@ -106,6 +113,7 @@ public:
   static Token While(const Location &l) { return Token(l, Kind::WHILE); }
   static Token Ident(const Location &l, const std::string &str);
   static Token String(const Location &l, const std::string &str);
+  static Token Integer(const Location &l, uint64_t nr);
 
   /// Print the token to a stream.
   void Print(std::ostream &os) const;

@@ -123,6 +123,8 @@ private:
   void LowerExpr(const Scope &scope, const Expr &expr);
   /// Lowers a reference to an identifier.
   void LowerRefExpr(const Scope &scope, const RefExpr &expr);
+  /// Lowers an integer expression.
+  void LowerIntegerExpr(const Scope &scope, const IntegerExpr &expr);
   /// Lowers a binary expression.
   void LowerBinaryExpr(const Scope &scope, const BinaryExpr &expr);
   /// Lowers a call expression.
@@ -141,6 +143,8 @@ private:
   void EmitCall(unsigned nargs);
   /// Push a function address to the stack.
   void EmitPushFunc(Label entry);
+  /// Push an int to the stack.
+  void EmitPushInt(int64_t nr);
   /// Push a prototype to the stack.
   void EmitPushProto(RuntimeFn fn);
   /// Push the nth value from the stack to the top.
